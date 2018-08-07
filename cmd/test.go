@@ -35,7 +35,23 @@ func runTests(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	args = removeFlag("--force-migrations", args)
+	args = removeFlag("--skip-db-setup", args)
+
 	return test.NewRunner(args).Run()
+}
+
+func removeFlag(flag string, args []string) []string {
+	for i, v := range args {
+		if v != flag {
+			continue
+		}
+
+		args = append(args[:i], args[i+1:]...)
+		break
+	}
+
+	return args
 }
 
 func init() {

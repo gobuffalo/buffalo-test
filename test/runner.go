@@ -22,7 +22,6 @@ type Runner struct {
 }
 
 func NewRunner(args []string) Runner {
-	args = removeFlag("--force-migrations", args)
 	return Runner{
 		args: args,
 	}

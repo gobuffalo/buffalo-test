@@ -8,19 +8,6 @@ import (
 	"github.com/gobuffalo/envy"
 )
 
-func removeFlag(flag string, args []string) []string {
-	for i, v := range args {
-		if v != flag {
-			continue
-		}
-
-		args = append(args[:i], args[i+1:]...)
-		break
-	}
-
-	return args
-}
-
 func findTestPackages() ([]string, error) {
 	args := []string{}
 	out, err := exec.Command(envy.Get("GO_BIN", "go"), "list", "./...").Output()
